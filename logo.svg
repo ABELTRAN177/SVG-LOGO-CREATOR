@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <rect width="50%" height="50%" fill="aqua" />
+            <text x="25%" y="35%" font-size="25" dy="-.5em" fill="white" text-anchor="middle">cool</text>
+            </svg>
+            

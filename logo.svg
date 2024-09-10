@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+            <polygon points="50,0 100,100 0,100" fill="aqua" />
+            <text x="25%" y="50%" font-size="25" dy="-.9em" fill="white" text-anchor="middle">cool</text>
+            </svg>   
+            

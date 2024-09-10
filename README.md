@@ -4,7 +4,6 @@
   ## Description
     A professional SVG generator that allows the user to display icons for future projects
 
-  // adds table of contents with links to each section 
   ## Table of Contents
   1. [Description](#description)
   2. [Installation](#installation)

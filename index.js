@@ -2,12 +2,13 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const jest = require('jest');
 
+// questions for the user to answer, populates within the terminal
 const questions = [
     `What is the text you want to include in the SVG?`, //0
     `What shape do you want to include in the SVG?`, //1
     `What color do you want the SVG? to be?` //2
 ]
-
+// uses fs to write the file to the logo.svg
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
         if (err) {
@@ -17,7 +18,7 @@ function writeToFile(fileName, data) {
         }
     });
 }
-
+// one input and two lists, the first list is for the shape, the second list is for the color 
 function init() {
     inquirer.prompt([
         {
@@ -38,6 +39,9 @@ function init() {
             choices: [`named color`, `hex`]
         }
     ])
+    // if the user chooses named color, it will prompt them to enter a color, if the color is not valid, it will prompt them to enter a valid color
+    // if the user chooses hex, it will prompt them to enter a hex value
+    // based on the color  chosen by the user, it will create the svg with the color, text, and shape and write it to the file
     .then((response) => {
       if (response.color === `named color`) {
         inquirer.prompt([{
@@ -79,33 +83,31 @@ function init() {
  
 })}
 
+//  had a switch statement here, but it was not working properly.  I replaced it with an if else statement
 function svglogocreator(color, text, shape) {
     let svgShape;
-    switch (shape) {
-        case 'square':
+    if (shape === 'square') {
             svgShape = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
             <rect width="50%" height="50%" fill="${color}" />
             <text x="25%" y="35%" font-size="25" dy="-.5em" fill="white" text-anchor="middle">${text}</text>
             </svg>
             `;
-            break;
-            case 'circle':
+        } else if (shape === 'circle') {
             svgShape = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
             <circle cx="50%" cy="50%" r="40%" fill="${color}" />
             <text x="50%" y="60%" font-size="25" dy="-.5em" fill="white" text-anchor="middle">${text}</text>
             </svg>
             `;
-            break;
-            case 'triangle':
+        // triangle created a lot of issues, so I had to change the points to make it work, i could not get the percentages to work
+        } else if (shape === 'triangle') {
             svgShape = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-            <polygon points="100%,10% 190%,190% 10%,190%" fill="${color}" />
-            <text x="50%" y="50%" font-size="25" dy="-.5em" fill="white" text-anchor="middle">${text}</text>
-            </svg>  
+            <polygon points="50,0 100,100 0,100" fill="aqua" />
+            <text x="25%" y="50%" font-size="25" dy="-.9em" fill="white" text-anchor="middle">cool</text>
+            </svg>   
             `;
-        break;
-            default:
-                console.log('Invalid shape');
-                return;
+        } else {
+            console.log('Invalid shape');
+            return;
     }
     return (svgShape);
 }
